@@ -421,7 +421,10 @@ class BulkTasksManager {
 
     console.log(namingConvention);
     if (namingConvention.toLowerCase().includes("{bulk-tasks}")) {
-      return name.slugify({ strict: true, replacement: "-" });
+      return name
+        .replace(/:/g, "_")
+        .replace(/[^\w\s'()_-]/g, "")
+        .slugify({ replacement: "-" });
     }
 
     return namingConvention
