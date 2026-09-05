@@ -423,8 +423,10 @@ class BulkTasksManager {
     if (namingConvention.toLowerCase().includes("{bulk-tasks}")) {
       return name
         .replace(/[:/]/g, "_")
-        .replace(/[^\w\s'().+_-]/g, "")
-        .slugify({ replacement: "-" });
+        .replace(/[^\w\s'().+,_-]/g, "")
+        .trim()
+        .replace(/\s+/g, "-")
+        .toLowerCase();
     }
 
     return namingConvention
